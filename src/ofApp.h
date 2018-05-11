@@ -1,4 +1,5 @@
 #pragma once
+#define USE_PROGRAMMABLE_GL 1
 
 #include "ofMain.h"
 #include "ofxOpenNI.h"
@@ -28,13 +29,11 @@ private:
 		void gotMessage(ofMessage msg);
     void throwFlower(ofVec2f vec, ofVec2f pos);
     
-    //vector<Flower> flowers;
-    vector<ofVec2f> forces;
+    ofVec2f preMouse; // 直前の座標
+    ofVec2f diff; // 座標の変化量
+    ofShader shader; // Shader
     
-    ofVec2f preMouse;
-    ofVec2f diff;
-    
-    ofxBox2d box2d;
-    vector<shared_ptr<Flower> > flowers;
+    ofxBox2d box2d; // Box2d field
+    vector<shared_ptr<Flower> > flowers; // FlowerクラスのVector
 		
 };
