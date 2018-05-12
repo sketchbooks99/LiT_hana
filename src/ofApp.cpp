@@ -127,9 +127,15 @@ void ofApp::draw(){
 //                        arm_points[1] = ofVec2f(sX-1, sY-1);
 //                        arm_points[2] = ofVec2f(eX+1, eY+1);
 //                        arm_points[3] = ofVec2f(eX-1, eY-1);
-//                        for(int i=0; i<4; i++) {
-//                            right_arm[i].get()->setPosition(arm_points[i]);
-//                        }
+//    
+//                        polygon.get()->clear();
+//                        polygon.get()->addVertex(arm_points[0]);
+//                        polygon.get()->addVertex(arm_points[1]);
+//                        polygon.get()->addVertex(arm_points[2]);
+//                        polygon.get()->addVertex(arm_points[2]);
+//                        polygon.get()->addVertex(arm_points[3]);
+//                        polygon.get()->addVertex(arm_points[1]);
+//                        polygon.get()->create(box2d.getWorld());
 //                        break;
 //                    default:
 //                        break;
