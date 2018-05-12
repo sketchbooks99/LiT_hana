@@ -34,6 +34,9 @@ private:
     ofShader shader; // Shader
     
     ofxBox2d box2d; // Box2d field
+    ofxBox2dCircle right_hand; // right hands Joint
+    shared_ptr<ofxBox2dPolygon> polygon;
+    ofVec2f arm_points[4];
     vector<shared_ptr<Flower> > flowers; // FlowerクラスのVector
 		
 };

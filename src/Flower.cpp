@@ -11,26 +11,41 @@ Flower::Flower() {
     ofDisableArbTex();
     img.load("flower.png");
     ofEnableArbTex();
+    
+    time = 0.0;
     alpha = 0.0;
-    isFlower = false;
+    Bloom = false;
+    Dead = false;
 }
 
+//--------------------------------------------------------------
 void Flower::update() {
     
     time += 0.01;
     if(time > 2.00) {
-        isFlower = true;
+        Bloom = true;
         alpha += 0.02;
         this->setRadius(r);
     }
     
-    float x = this->getPosition().x;
-    float y = this->getPosition().y;
+    // break flower and make five small_flower
+    if(this->getPosition().y < 100 && !isDead() && isFlower()) {
+        Dead = true;
+        small_img.load("small flower.png");
+        for(int i=0; i<5; i++) {
+            float x = this->getPosition().x;
+            float y = this->getPosition().y;
+            small[i].v.set(ofRandom(-0.5, 0.5), ofRandom(0.8, 1.2));
+            small[i].p.set(x, y);
+        }
+        dead_timer = 2.00;
+    }
     
 }
 
+//--------------------------------------------------------------
 void Flower::draw() {
-    if(!isFlower) {
+    if(!isFlower()) {
         
         // draw circle
         
@@ -41,7 +56,7 @@ void Flower::draw() {
         
         ofPopMatrix();
         
-    } else {
+    } else if(!isDead()){
         
         //draw flower
         
@@ -52,6 +67,7 @@ void Flower::draw() {
         
         // flower texture with shader
         shader.begin();
+        shader.setUniform1f("time", time);
         shader.setUniform1f("alpha", alpha);
         shader.setUniformTexture("tex", img.getTexture(), 0);
         float size = this->getRadius()*5; //重なりを作るために半径を5倍する
@@ -60,8 +76,29 @@ void Flower::draw() {
         
         ofPopMatrix();
         
+    } else {
+        draw_small_Flower();
     }
 }
+
+//--------------------------------------------------------------
+void Flower::draw_small_Flower() {
+    // no use box2d
+    //shader.begin();
+    
+    if(dead_timer > 0) {
+        for(int i=0; i<5; i++) {
+            small[i].p += small[i].v;
+            small_img.draw(small[i].p.x, small[i].p.y, 20, 20);
+        }
+        dead_timer -= 0.01;
+    }
+    
+    //shader.end();
+}
+
+
+
 
 
 

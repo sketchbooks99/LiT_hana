@@ -13,15 +13,29 @@
 
 class Flower : public ofxBox2dCircle{
 private:
-    float time; //時間
+    float time; // time
+    bool Bloom, Dead;
 public:
-    ofImage img; // 花の画像
+    typedef struct small_flower {
+        ofVec2f p; // position of small flower
+        ofVec2f v; // velocity of small flower
+    }Small;
+    
+    ofImage img; // flower image
+    ofImage small_img; // small flower image
+    Small small[5];
+    
     ofShader shader; // shader
-    float r; // 花の半径
-    bool isFlower;
-    float alpha;
+    float r; // flower radius
+    float alpha; // to use shader
+    float dead_timer; // small flower dead timer
     
     Flower();
-    void update(); // 状態の更新
-    void draw(); // 描画
+    void update();
+    void draw();
+    void draw_small_Flower(); // after delete flower
+    
+    // to see from ofApp, not to set from ofApp
+    bool isDead() { return Dead; }
+    bool isFlower() { return Bloom; }
 };
