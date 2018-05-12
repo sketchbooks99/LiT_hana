@@ -60,6 +60,8 @@ void ofApp::update(){
     
     for(int i=0; i<flowers.size(); i++) {
         flowers[i].get()->update();
+        
+        // delete flower
         if(flowers[i].get()->dead_timer <= 0) {
             auto p = flowers.begin();
             flowers.erase(p+i);
@@ -182,7 +184,8 @@ void ofApp::mouseMoved(int x, int y ){
 
 //--------------------------------------------------------------
 void ofApp::mouseDragged(int x, int y, int button){
-    //flowers.clear();
+    
+    // delete 3 flowers
     for(int i=0; i<3; i++) {
         if(flowers.size() > 0) {
             auto p = flowers.begin(); // なぜerase(0)だとエラー吐くの？ vector<shared_ptr<Flower> > flowers
