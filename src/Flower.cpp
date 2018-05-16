@@ -70,7 +70,7 @@ void Flower::draw() {
         shader.setUniform1f("time", time);
         shader.setUniform1f("alpha", alpha);
         shader.setUniformTexture("tex", img.getTexture(), 0);
-        float size = this->getRadius()*5; //重なりを作るために半径を5倍する
+        float size = this->getRadius()*5; 
         img.draw(0, 0, size, size);
         shader.end();
         
@@ -83,18 +83,18 @@ void Flower::draw() {
 
 //--------------------------------------------------------------
 void Flower::draw_small_Flower() {
-    // no use box2d
-    //shader.begin();
     
     if(dead_timer > 0) {
         for(int i=0; i<5; i++) {
+            ofPushMatrix();
             small[i].p += small[i].v;
-            small_img.draw(small[i].p.x, small[i].p.y, 20, 20);
+            ofTranslate(small[i].p);
+            ofRotateX(sin(dead_timer*5.0)*45);
+            small_img.draw(0, 0, 20, 20);
+            ofPopMatrix();
         }
         dead_timer -= 0.01;
     }
-    
-    //shader.end();
 }
 
 
