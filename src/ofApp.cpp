@@ -43,12 +43,6 @@ void ofApp::setup(){
         right_arm[i].setup(box2d.getWorld(), 0, 0, 10);
     }
 
-    // init arm points
-    arm_points[0] = ofVec2f(100, ofGetHeight()-100);
-    arm_points[1] = ofVec2f(100, ofGetHeight()-120);
-    arm_points[2] = ofVec2f(ofGetWidth()-100, ofGetHeight()-120);
-    arm_points[3] = ofVec2f(ofGetWidth()-100, ofGetHeight()-100);
-
     shader.load("shaders/shader.vert", "shaders/shader.frag");
     
     maskedImage.allocate(640, 480, OF_IMAGE_COLOR_ALPHA);
@@ -196,9 +190,6 @@ void ofApp::mouseMoved(int x, int y ){
         if(diff.x > 20 || diff.x < -20 || diff.y > 20 || diff.y < -20)
             throwFlower(diff, ofVec2f(x, y));
     }
-    
-//    arm_points[0] = ofVec2f(x+1, y+1);
-//    arm_points[1] = ofVec2f(x-1, y-1);
     
     // previous mouse position
     preMouse = ofVec2f(x, y);

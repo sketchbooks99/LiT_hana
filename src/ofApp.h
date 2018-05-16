@@ -40,7 +40,6 @@ private:
     ofxBox2dCircle right_arm[10];
     //ofxBox2dJoint right_arm;
     shared_ptr<ofxBox2dPolygon> polygon;
-    ofVec2f arm_points[4];
     ofVec2f right_hand_pos;
     vector<shared_ptr<Flower> > flowers; // FlowerクラスのVector
 		
