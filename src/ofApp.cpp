@@ -37,7 +37,7 @@ void ofApp::setup(){
     right_hiji.setPhysics(0.0, 0.8, 0.0);
     right_hiji.setup(box2d.getWorld(), 0, 0, 10);
     
-    //right arm Joint
+    //right arm
     for(int i=0; i<10; i++) {
         right_arm[i].setPhysics(0.0, 0.8, 0.0);
         right_arm[i].setup(box2d.getWorld(), 0, 0, 10);
