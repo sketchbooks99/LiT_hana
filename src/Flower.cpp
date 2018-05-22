@@ -70,7 +70,7 @@ void Flower::draw() {
         shader.setUniform1f("time", time);
         shader.setUniform1f("alpha", alpha);
         shader.setUniformTexture("tex", img.getTexture(), 0);
-        float size = this->getRadius()*5; 
+        float size = this->getRadius()*5;
         img.draw(0, 0, size, size);
         shader.end();
         

@@ -29,7 +29,7 @@ private:
 		void gotMessage(ofMessage msg);
     void throwFlower(ofVec2f vec, ofVec2f pos);
     
-    ofVec2f preMouse; // 直前の座標
+    ofVec2f prePos; // 直前の座標
     ofVec2f diff; // 座標の変化量
     ofShader shader; // Shader
     
@@ -38,7 +38,6 @@ private:
     ofxBox2d box2d; // Box2d field
     ofxBox2dCircle right_hand, right_hiji; // right hands Joint
     ofxBox2dCircle right_arm[10];
-    //ofxBox2dJoint right_arm;
     shared_ptr<ofxBox2dPolygon> polygon;
     ofVec2f right_hand_pos;
     vector<shared_ptr<Flower> > flowers; // FlowerクラスのVector

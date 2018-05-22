@@ -14,11 +14,11 @@ void ofApp::setup(){
     kinect.setMirror(true);
     kinect.addDepthGenerator();
     kinect.addImageGenerator();
-    
+
     // to match RGB and Depth
     kinect.getDepthGenerator().GetAlternativeViewPointCap().SetViewPoint(kinect.getImageGenerator());
     kinect.addUserGenerator(); // kinect can track man
-    
+
     //  start kinect
     kinect.start();
     
@@ -27,7 +27,7 @@ void ofApp::setup(){
     box2d.init();
     box2d.setFPS(60.0);
     box2d.setGravity(0, 1);
-    box2d.createBounds(0, 0, ofGetWidth(), ofGetHeight());
+    box2d.createBounds(0, 0, ofGetWidth(), ofGetHeight()-20);
     
     // right hand box2dCircle
     right_hand.setPhysics(0.0, 0.8, 0.0);
@@ -89,7 +89,7 @@ void ofApp::draw(){
     //kinect.drawDepth(0, 0, 640, 480);
     //kinect.drawSkeletons(0, 0, 640, 480);
     maskedImage.draw(0, 0, 640, 480);
-    
+
     if(kinect.getNumTrackedUsers() > 0) { // if any man tracked
         ofxOpenNIUser user = kinect.getTrackedUser(0);
 
@@ -107,14 +107,13 @@ void ofApp::draw(){
                         right_hand_pos.set(x, y);
                         ofSetColor(255, 0, 0, 127);
                         right_hand.setPosition(right_hand_pos);
-                        diff.set(right_hand_pos - preMouse);
+                        diff.set(right_hand_pos - prePos);
                         if(flowers.size() < 300) {
-                            diff.set(right_hand_pos - preMouse);
                             if(diff.x > 20 || diff.x < -20 || diff.y > 20 || diff.y < -20)
                                 throwFlower(diff, right_hand_pos);
                         }
                         right_hand.draw();
-                        preMouse = right_hand_pos;
+                        prePos = right_hand_pos;
                         break;
                     case JOINT_LEFT_HAND:
                         if(y < 100) { // if left hands.y < 100, clear flowers
@@ -186,13 +185,13 @@ void ofApp::keyReleased(int key){
 //--------------------------------------------------------------
 void ofApp::mouseMoved(int x, int y ){
     if(flowers.size() < 300) {
-        diff.set(x-preMouse.x, y-preMouse.y);
+        diff.set(x-prePos.x, y-prePos.y);
         if(diff.x > 20 || diff.x < -20 || diff.y > 20 || diff.y < -20)
             throwFlower(diff, ofVec2f(x, y));
     }
     
     // previous mouse position
-    preMouse = ofVec2f(x, y);
+    prePos = ofVec2f(x, y);
 }
 
 //--------------------------------------------------------------
